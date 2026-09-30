@@ -18,6 +18,7 @@ def read_patients_into_list(fileName: str) -> list[PatientExam]:
                 pass #Skip adding data with errors
             # exam_ID: int, date: str, name: str, weight: int, height: float
             #print(f"int{(parts[0])}, {parts[1]}, {parts[2]}, {int(parts[3])}, {float(parts[4])}")
+        return exams
 
 def print_patient_stats(exams: list[PatientExam]) -> None:
     #calculate average bmi
