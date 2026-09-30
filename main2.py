@@ -1,5 +1,5 @@
 from classes import PatientExam
-
+from data_IO import parse_row
 exams = [] #create list for exam objects
 
 file_name = "patient_data.csv"
@@ -7,13 +7,15 @@ file_name = "patient_data.csv"
 #read file and append exam objects to list
 with open (file_name) as f:
     
-    next (f)
+    for line in f: #Iterate through file until we find the header row
+        if line.find(',') != -1:
+            break
 
     for line in f:
-        line = line.strip()
-        parts = line.split(',')
-
-        exams.append(PatientExam(int(parts[0]), parts[1], parts[2], int(parts[3]), float(parts[4])))
+        examID, date, name, weight, height = parse_row(line)
+        # exam_ID: int, date: str, name: str, weight: int, height: float
+        #print(f"int{(parts[0])}, {parts[1]}, {parts[2]}, {int(parts[3])}, {float(parts[4])}")
+        exams.append(PatientExam(examID, date, name, weight, height))
 
 #calculate average bmi
 bmi_total = 0
