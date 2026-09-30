@@ -17,6 +17,9 @@ with open (file_name) as f:
         #print(f"int{(parts[0])}, {parts[1]}, {parts[2]}, {int(parts[3])}, {float(parts[4])}")
         exams.append(PatientExam(examID, date, name, weight, height))
 
+
+print(f'Number of Patient exams: {len(exams)}')
+
 #calculate average bmi
 bmi_total = 0
 for exam in exams:
@@ -32,10 +35,13 @@ except:
 month_counts = {}
 for exam in exams:
     month = exam.get_exam_month()
+    if month > 12:
+        raise ValueError('Invalid input for month')
     if month in month_counts:
         month_counts[month] += 1
     else:
         month_counts[month] = 1
+    
 
 
 #create variables to track the busiest month
@@ -48,7 +54,10 @@ for month, count in month_counts.items():
         highest_count = count
         busiest_month = month
 
-print(f"Busiest month: {busiest_month}") 
 
+# Dictionary to convert int to month name
+month_names = {1:'January', 2:'February', 3:'March', 4:'April', 5:'May', 6:'June', 7:'July', 8:'August', 9:'September', 10:'October', 11:'November', 12:'December'}
+
+print(f"Busiest month: {month_names[busiest_month]}")
 
 
