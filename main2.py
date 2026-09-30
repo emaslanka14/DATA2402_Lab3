@@ -12,10 +12,13 @@ with open (file_name) as f:
             break
 
     for line in f:
-        examID, date, name, weight, height = parse_row(line)
+        try:
+            examID, date, name, weight, height = parse_row(line)
+            exams.append(PatientExam(examID, date, name, weight, height))
+        except:
+            pass #Skip adding data with errors
         # exam_ID: int, date: str, name: str, weight: int, height: float
         #print(f"int{(parts[0])}, {parts[1]}, {parts[2]}, {int(parts[3])}, {float(parts[4])}")
-        exams.append(PatientExam(examID, date, name, weight, height))
 
 
 print(f'Number of Patient exams: {len(exams)}')

@@ -11,17 +11,16 @@ def parse_row(row: str) -> tuple:
 
     values = row.strip().split(",")
 
-
-
-    if "" in values:
-        raise MissingValueException()
-
     try:
+        if "" in values:
+            raise MissingValueException()
+        
         exam_ID = int(values[0])
         Date = values[1]
         Patient_name = values[2]
         weight = float(values[3])
         height = float(values[4])
+
     except ValueError:
         raise TextFormatException()
     
