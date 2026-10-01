@@ -36,7 +36,7 @@ def print_patient_stats(exams: list[PatientExam]) -> None:
     month_counts = {}
     for exam in exams:
         month = exam.get_exam_month()
-        if month > 12:
+        if month > 12 or month < 1:
             raise ValueError('Invalid input for month')
         if month in month_counts:
             month_counts[month] += 1
